@@ -1,4 +1,4 @@
-FROM ubuntu:14.04
+FROM docker.io/arm64v8/ubuntu:14.04
 
 MAINTAINER KiwenLau <kiwenlau@gmail.com>
 
@@ -14,7 +14,7 @@ RUN wget https://github.com/kiwenlau/compile-hadoop/releases/download/2.7.2/hado
     rm hadoop-2.7.2.tar.gz
 
 # set environment variable
-ENV JAVA_HOME=/usr/lib/jvm/java-7-openjdk-amd64 
+ENV JAVA_HOME=/usr/lib/jvm/java-7-openjdk-arm64 
 ENV HADOOP_HOME=/usr/local/hadoop 
 ENV PATH=$PATH:/usr/local/hadoop/bin:/usr/local/hadoop/sbin 
 
