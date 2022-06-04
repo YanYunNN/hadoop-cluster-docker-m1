@@ -1083,7 +1083,7 @@
   </property>
   <property>
     <name>hive.cli.print.current.db</name>
-    <value>false</value>
+    <value>true</value>
     <description>Whether to include the current database in the Hive prompt.</description>
   </property>
   <property>
@@ -3227,7 +3227,7 @@
   </property>
   <property>
     <name>hive.cli.print.header</name>
-    <value>false</value>
+    <value>true</value>
     <description>Whether to print the names of the columns in query output.</description>
   </property>
   <property>
