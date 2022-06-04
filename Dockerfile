@@ -21,7 +21,7 @@ RUN wget https://archive.apache.org/dist/hive/hive-2.1.1/apache-hive-2.1.1-bin.t
 
 
 # set environment variable
-ENV JAVA_HOME=/usr/lib/jvm/java-7-openjdk-arm64 
+ENV JAVA_HOME=/usr/lib/jvm/java-7-openjdk-arm64
 ENV HADOOP_HOME=/usr/local/hadoop 
 ENV HIVE_HOME=/usr/local/hive
 ENV PATH=$PATH:$HADOOP_HOME/bin:$HADOOP_HOME/sbin
@@ -50,6 +50,7 @@ RUN mv /tmp/hadoop/ssh_config ~/.ssh/config && \
     mv /tmp/hadoop/slaves $HADOOP_HOME/etc/hadoop/slaves && \
     mv /tmp/hadoop/start-hadoop.sh ~/start-hadoop.sh && \
     mv /tmp/hadoop/run-wordcount.sh ~/run-wordcount.sh && \
+    mv /tmp/hive/mysql-connector-java-5.1.47.jar $HIVE_HOME/lib/mysql-connector-java-5.1.47.jar && \
     mv /tmp/hive/hive-site.xml $HIVE_HOME/conf/hive-site.xml && \
     mv /tmp/hive/hive-env.sh $HIVE_HOME/conf/hive-env.sh && \
     mv /tmp/hive/start-hive.sh ~/start-hive.sh

@@ -14,10 +14,6 @@ $HADOOP_HOME/sbin/mr-jobhistory-daemon.sh start historyserver
 
 echo -e "\n"
 
-schematool --initSchema -dbType derby
-
-echo -e "\n"
-
 jps
 
 echo -e "\n"
