@@ -20,12 +20,19 @@ RUN wget https://archive.apache.org/dist/hive/hive-2.1.1/apache-hive-2.1.1-bin.t
     rm apache-hive-2.1.1-bin.tar.gz
 
 
+# install flume 1.8.0
+RUN wget https://github.com/apache/flume/archive/refs/tags/release-1.8.0-rc2.tar.gz && \
+    tar -xzvf release-1.8.0-rc2.tar.gz && \
+    mv flume-release-1.8.0-rc2 /usr/local/flume && \
+    rm release-1.8.0-rc2.tar.gz
+
+
 # set environment variable
 ENV JAVA_HOME=/usr/lib/jvm/java-7-openjdk-arm64
 ENV HADOOP_HOME=/usr/local/hadoop 
 ENV HIVE_HOME=/usr/local/hive
-ENV PATH=$PATH:$HADOOP_HOME/bin:$HADOOP_HOME/sbin
-ENV PATH=$PATH:$HIVE_HOME/bin
+ENV FLUME_HOME=/usr/local/flume
+ENV PATH=$PATH:$HADOOP_HOME/bin:$HADOOP_HOME/sbin:$HIVE_HOME/bin:$FLUME_HOME/bin
 
 
 # ssh without key
@@ -40,6 +47,7 @@ RUN mkdir -p ~/hdfs/namenode && \
 
 COPY config/hadoop/* /tmp/hadoop/
 COPY config/hive /tmp/hive/
+COPY config/flume /tmp/flume/
 
 RUN mv /tmp/hadoop/ssh_config ~/.ssh/config && \
     mv /tmp/hadoop/hadoop-env.sh /usr/local/hadoop/etc/hadoop/hadoop-env.sh && \
@@ -53,7 +61,11 @@ RUN mv /tmp/hadoop/ssh_config ~/.ssh/config && \
     mv /tmp/hive/mysql-connector-java-5.1.47.jar $HIVE_HOME/lib/mysql-connector-java-5.1.47.jar && \
     mv /tmp/hive/hive-site.xml $HIVE_HOME/conf/hive-site.xml && \
     mv /tmp/hive/hive-env.sh $HIVE_HOME/conf/hive-env.sh && \
-    mv /tmp/hive/start-hive.sh ~/start-hive.sh
+    mv /tmp/hive/start-hive.sh ~/start-hive.sh && \
+    mv /tmp/flume/flume-conf.properties $FLUME_HOME/conf/flume-conf.properties && \
+    mv /tmp/flume/flume-env.sh $FLUME_HOME/conf/flume-env.sh
+
+
 
 RUN chmod +x ~/start-hadoop.sh && \
     chmod +x ~/run-wordcount.sh && \
